@@ -52,7 +52,6 @@ public class HuffEncode {
 		
 		// Write out total number of symbols as 32 bit value.
 		bit_sink.write(num_symbols,32);
-		System.out.println(num_symbols);
 
 		// Reopen input file.
 		fis = new FileInputStream(input_file_name);

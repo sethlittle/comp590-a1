@@ -39,7 +39,6 @@ public class HuffDecode {
 		HuffmanDecodeTree huff_tree = new HuffmanDecodeTree(symbols_with_length);
 		
 		int num_symbols = bit_source.next(32);
-		System.out.println(num_symbols);
 
 		// Read in the next 32 bits from the input file  the number of symbols
 
