@@ -11,9 +11,12 @@ public class HuffmanDecodeTree {
 	private HuffmanNode _root;
 	
 	public HuffmanDecodeTree(List<SymbolWithCodeLength> symbols_with_code_lengths) {
+		if (symbols_with_code_lengths == null) {
+			throw new RuntimeException("Symbols List is null");
+		}
 
 		// Create empty internal root node.		
-		_root = new InternalHuffmanNode(null, null);
+		_root = new InternalHuffmanNode();
 		
 		// Insert each symbol from list into tree
 		for (int i = 0; i < symbols_with_code_lengths.size(); i++) {
@@ -32,6 +35,8 @@ public class HuffmanDecodeTree {
 		// Start at the root
 		HuffmanNode n = _root;
 		
+		// Get next bit and walk either left or right,
+		// updating n to be as appropriate
 		while (!n.isLeaf()) {
 			int bit = bit_source.next(1);
 			if (bit == 0) {
@@ -39,8 +44,7 @@ public class HuffmanDecodeTree {
 			} else {
 				n = n.right();
 			}
-			// Get next bit and walk either left or right,
-			// updating n to be as appropriate
+
 		}
 		
 		// Return symbol at leaf

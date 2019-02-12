@@ -49,6 +49,8 @@ public class HuffmanEncoder {
 			node_list.sort(null);
 		}
 		
+		//now the size of this list should be equal to 1
+		assert node_list.size() == 1;
 		
 		// Create a temporary empty mapping between symbol values and their code strings
 		Map<Integer, String> cmap = new HashMap<Integer, String>();
@@ -57,7 +59,7 @@ public class HuffmanEncoder {
 		// way (0 means left, 1 means right). Insert mapping between symbol value and
 		// code string into cmap when each leaf is reached.
 		for (int i = 0; i < symbols.length; i++) {
-			traverseFromRoot(cmap, node_list.get(0), "", i);			
+			traverseFromRoot(cmap, node_list.get(0), "", i);	//helper method because do this same code twice		
 		}
 		
 		// Create empty list of SymbolWithCodeLength objects
@@ -82,7 +84,6 @@ public class HuffmanEncoder {
 		assert canonical_root.isFull();
 		
 		// Create code map that encoder will use for encoding
-		
 		_code_map = new HashMap<Integer, String>();
 		
 		// Walk down canonical tree forming code strings as you did before and
@@ -103,6 +104,7 @@ public class HuffmanEncoder {
 					return;
 			}
 			
+			// for each node - take the codeLength and pass it back in recursively, 1 for right and 0 for left
 			if (!curr.isLeaf()) {
 				traverseFromRoot(map, curr.right(), codeLength + "1", i);
 				traverseFromRoot(map, curr.left(), codeLength + "0", i);
@@ -115,6 +117,7 @@ public class HuffmanEncoder {
 	}
 
 	public void encode(int symbol, OutputStreamBitSink bit_sink) throws IOException {
+		//writes each 8 bit encoded value
 		bit_sink.write(_code_map.get(symbol).length(), 8);
 	}
 	

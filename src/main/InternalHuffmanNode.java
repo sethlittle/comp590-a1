@@ -9,22 +9,25 @@ public class InternalHuffmanNode implements HuffmanNode {
 		_left = left;
 		_right = right;
 	}
-	public InternalHuffmanNode() {
+	public InternalHuffmanNode() { // to create empty nodes
 		_left = null;
 		_right = null;
 	}
 	
 	@Override
+	//add counts of children
 	public int count() {
 		return _left.count() + _right.count();
 	}
 
 	@Override
+	//internal node
 	public boolean isLeaf() {
 		return false;
 	}
 
 	@Override
+	//internal nodes don't have a symbol
 	public int symbol() {
 		if (!isLeaf()) {
 			throw new RuntimeException("Internal Nodes dont have symbols");
@@ -33,6 +36,7 @@ public class InternalHuffmanNode implements HuffmanNode {
 	}
 
 	@Override
+	//returns the height of each left and right child and updates Lh and Rh
 	public int height() {
 		int Lh = 0;
 		int Rh = 0;
@@ -43,6 +47,7 @@ public class InternalHuffmanNode implements HuffmanNode {
 			Rh = this.right().height();
 		}
 		
+		//add one for the root
 		if (Lh >= Rh) {
 			return Lh + 1;
 		} else {
@@ -51,6 +56,8 @@ public class InternalHuffmanNode implements HuffmanNode {
 	}
 
 	@Override
+	//must check first if the children are not null
+	//then checks to see if both children are full
 	public boolean isFull() {
 		if (this.left() != null && this.right() != null) {
 			if (this.left().isFull() && this.right().isFull()) {

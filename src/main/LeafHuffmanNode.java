@@ -10,6 +10,7 @@ public class LeafHuffmanNode implements HuffmanNode {
 		_count = count;
 	}
 	
+	//when do not have the counts
 	public LeafHuffmanNode(int symbol) {
 		_sym = symbol;
 		_count = 0;
@@ -30,6 +31,7 @@ public class LeafHuffmanNode implements HuffmanNode {
 		return _sym;
 	}
 
+	//defined for leaf nodes as 0
 	@Override
 	public int height() {
 		return 0;
